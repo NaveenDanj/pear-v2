@@ -17,5 +17,4 @@ def readFile(filepath):
         return content_by_lines
 
 content_by_lines = readFile(sys.argv[1])
-print(content_by_lines)
 lex_tree = generate_lex_tree(content_by_lines)

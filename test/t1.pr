@@ -20,3 +20,15 @@ if condition
     endif
 
 endif
+
+
+if condition
+    print cond
+
+    if another
+        print hello
+    endif
+
+else
+    print cond1
+endif
