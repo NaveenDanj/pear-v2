@@ -1,0 +1,22 @@
+if condition
+
+    if another_condition
+        print 'condition is true'
+
+        if new_condition
+            print 'another new'
+        else
+            print 'another else'
+        endif
+        
+    else
+        
+        if new_condition
+            print 'another new'
+        else
+            print 'another else'
+        endif
+
+    endif
+
+endif
