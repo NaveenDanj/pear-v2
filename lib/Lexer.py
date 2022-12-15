@@ -1,6 +1,6 @@
 from lib.const.Keywords import KEYWORDS
 from lib.const.SysConst import Statement
-from lib.util.lex_helper import lex_if
+from lib.util.lex_helper import lex_if , lex_while
 
 def generate_lex_tree (content_by_lines) :
 
@@ -53,6 +53,8 @@ def lexer(statement_list):
         st = statement_list[lexer_index]
         if st.splitted[0] == 'if':
             lex_if(lexer_index , statement_list)
+        elif st.splitted[0] == 'while':
+            lex_while(lexer_index , statement_list)
         lexer_index += 1
 
     for item in statement_list:
