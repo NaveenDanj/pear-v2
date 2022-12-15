@@ -1,34 +1,36 @@
 if condition
-
     if another_condition
         print 'condition is true'
-
         if new_condition
             print 'another new'
         else
             print 'another else'
         endif
-        
     else
-        
         if new_condition
             print 'another new'
         else
             print 'another else'
         endif
-
     endif
-
 endif
 
 
-if condition
-    print cond
 
-    if another
-        print hello
-    endif
 
+if last_new_condition
+    print 'another new'
 else
-    print cond1
+    print 'another else'
+endif
+
+
+
+
+
+
+if last_new_condition
+    print 'another new'
+else
+    print 'another else'
 endif
