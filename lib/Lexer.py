@@ -1,6 +1,6 @@
 from lib.const.Keywords import KEYWORDS
 from lib.const.SysConst import Statement
-from lib.util.lex_helper import lex_if , lex_while
+from lib.util.lex_helper import lex_if , lex_while , lex_blockarize_if
 
 def generate_lex_tree (content_by_lines) :
 
@@ -34,8 +34,8 @@ def generate_lex_tree (content_by_lines) :
         counter += 1
 
     statement_list = build_syntax_tree(statement_list)
-    lexer(statement_list)
-
+    statement_list = lexer(statement_list)
+    statement_list = blokerize_lex_tree(statement_list)
     
 def build_syntax_tree(statement_list):
 
@@ -57,8 +57,15 @@ def lexer(statement_list):
             lex_while(lexer_index , statement_list)
         lexer_index += 1
 
-    for item in statement_list:
-        print(item.raw_statement , "-" , item.nested_id)
+    # for item in statement_list:
+    #     print(item.raw_statement , "-" , item.nested_id)
 
-
+    return statement_list
     
+def blokerize_lex_tree(statement_list):
+    
+    for index , st in enumerate(statement_list):
+        if st.splitted[0] == 'if':
+            lex_blockarize_if(index , statement_list)
+    
+    return statement_list

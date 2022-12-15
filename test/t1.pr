@@ -16,11 +16,20 @@ if condition
         endif
 
         while condition do
-            print 'itteration statements'
+
+            if condtion_stisfied_while_statement
+                print 'itteration statements'
+            endif
+
+            print 'print anyways'
+
         endwhile
 
     endif
 endif
+
+
+
 
 
 
@@ -29,6 +38,9 @@ if last_new_condition
 else
     print 'another else'
 endif
+
+
+
 
 
 
