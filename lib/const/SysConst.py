@@ -12,4 +12,10 @@ class Statement:
         self.raw_statement = raw_statement
         self.splitted = splitted
         self.identifier = None
-        self.line_number = None
+        self.pointer = None
+
+
+class Token:
+
+    def __init__(self , type , ):
+        pass

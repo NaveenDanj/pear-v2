@@ -1,3 +1,5 @@
+@start
+
 if condition
     if another_condition
         print 'condition is true'
@@ -12,12 +14,16 @@ if condition
         else
             print 'another else'
         endif
+
+        while condition do
+            print 'itteration statements'
+        endwhile
+
     endif
 endif
 
 
 
-
 if last_new_condition
     print 'another new'
 else
@@ -26,11 +32,10 @@ endif
 
 
 
-
-
-
 if last_new_condition
     print 'another new'
 else
     print 'another else'
 endif
+
+@end

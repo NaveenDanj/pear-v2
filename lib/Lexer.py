@@ -1,12 +1,11 @@
 from lib.const.Keywords import KEYWORDS
 from lib.const.SysConst import Statement
-# from lib.util.ConditionalStatementLexer import handle_if_tree
-
 
 def generate_lex_tree (content_by_lines) :
 
     statement_list = []
     lexer_tree = []
+    counter = 0
     for statement in content_by_lines:
 
         statement.line = statement.raw_line.strip()
@@ -26,7 +25,9 @@ def generate_lex_tree (content_by_lines) :
 
         _statement = Statement(statement.raw_line , splitted)
         _statement.line_number = statement.line_number
+        _statement.pointer = counter
         statement_list.append(_statement)
-
+        counter += 1
+        
     for item in statement_list:
-        print(item.raw_statement)
+        print( str(item.pointer) +  "-" + item.raw_statement)
