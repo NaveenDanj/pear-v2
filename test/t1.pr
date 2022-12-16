@@ -4,24 +4,24 @@ if condition
     if another_condition
         print 'condition is true'
         if new_condition
-            print 'another new'
+            print 'another new 1'
         else
-            print 'another else'
+            print 'another else 2'
         endif
     else
         if new_condition
-            print 'another new'
+            print 'another new 3'
         else
-            print 'another else'
+            print 'another else 4'
         endif
 
         while condition do
 
             if condtion_stisfied_while_statement
-                print 'itteration statements'
+                print 'itteration statements 5'
             endif
 
-            print 'print anyways'
+            print 'print anyways 6'
 
         endwhile
 
@@ -34,9 +34,9 @@ endif
 
 
 if last_new_condition
-    print 'another new'
+    print 'another new 7'
 else
-    print 'another else'
+    print 'another else 8'
 endif
 
 
@@ -45,9 +45,9 @@ endif
 
 
 if last_new_condition
-    print 'another new'
+    print 'another new 9'
 else
-    print 'another else'
+    print 'another else 10'
 endif
 
 @end

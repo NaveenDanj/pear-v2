@@ -39,7 +39,7 @@ def generate_lex_tree (content_by_lines) :
 
     for item in statement_list:
         if item.next != None:
-            print(item.pointer , " -> " ,  item.raw_statement , " -> " , item.true_pointer , item.false_pointer , item.next.pointer , item.default_pointer)
+            print(item.pointer , " -> " ,  item.raw_statement , " -> " , item.default_pointer , item.true_pointer , item.false_pointer , item.next.pointer)
     
 def build_syntax_tree(statement_list):
 
@@ -62,7 +62,7 @@ def lexer(statement_list):
         else:
             lex_expression(lexer_index , statement_list)
         lexer_index += 1
-
+        
     # for item in statement_list:
     #     print(item.raw_statement , "-" , item.nested_id)
 
@@ -76,7 +76,8 @@ def blokerize_lex_tree(statement_list):
             st.true_pointer = true_part[0].pointer
             st.default_pointer = endif_index
             # print('----------------' , statement_list[ true_part[ len(true_part)-1 ].pointer ].next )
-            # statement_list[ true_part[ len(true_part)-1 ].pointer ].next = endif_index
+            # if type (statement_list[true_part[ len(true_part)-1 ]] ) == type(st):
+            statement_list[ true_part[ len(true_part)-1 ].pointer ].next =  statement_list[endif_index]
 
             if len(false_part) > 0:
                 st.false_pointer = false_part[0].pointer
