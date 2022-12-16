@@ -1,6 +1,6 @@
 from lib.const.Keywords import KEYWORDS
 from lib.const.SysConst import Statement
-from lib.util.lex_helper import lex_if , lex_while , lex_blockarize_if
+from lib.util.lex_helper import lex_if , lex_while , lex_blockarize_if , lex_blockarize_while
 
 def generate_lex_tree (content_by_lines) :
 
@@ -36,6 +36,9 @@ def generate_lex_tree (content_by_lines) :
     statement_list = build_syntax_tree(statement_list)
     statement_list = lexer(statement_list)
     statement_list = blokerize_lex_tree(statement_list)
+    statement_list = link_blocks(statement_list)
+
+    
 
     for item in statement_list:
         if item.next != None:
@@ -82,6 +85,12 @@ def blokerize_lex_tree(statement_list):
             if len(false_part) > 0:
                 st.false_pointer = false_part[0].pointer
 
+        elif st.splitted[0] == 'while':
+            endwhile_index , while_index = lex_blockarize_while(index , statement_list)
+            st.default_pointer = endwhile_index+1
+            statement_list[endwhile_index].next = statement_list[while_index]
+
+
     return statement_list
 
 
@@ -99,5 +108,18 @@ def lex_expression(lexer_index , statement_list):
 
 def link_blocks(statement_list):
     for index , st in enumerate(statement_list):
+        
         if st.splitted[0] == 'if':
-            pass
+            st.default_pointer = statement_list[st.default_pointer]
+            st.true_pointer = statement_list[st.true_pointer]
+
+            if st.false_pointer != None:
+                st.false_pointer = statement_list[st.false_pointer]
+
+        elif st.splitted[0] == 'while':
+            st.default_pointer = statement_list[st.default_pointer]
+
+        elif st.default_pointer != None:
+            st.default_pointer = statement_list[st.default_pointer]
+    
+    return statement_list

@@ -40,3 +40,15 @@ def lex_blockarize_if(index , statement_list):
                     true_part = statement_list[index+1 : item_index]
 
     return true_part , false_part , endif_index
+
+
+def lex_blockarize_while(index , statement_list):
+    root_item = statement_list[index]
+    endwhile_index = 0
+    
+    for item_index , item in enumerate(statement_list):
+        if root_item.nested_id == item.nested_id:
+            if item.splitted[0] == 'endwhile':
+                endwhile_index = item_index
+    
+    return endwhile_index , index
