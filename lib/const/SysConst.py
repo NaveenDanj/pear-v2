@@ -15,16 +15,11 @@ class Statement:
         self.white_space_before = 0
         self.next = None
         self.prev_pointer = None
-        self.root_pointer = None
         self.nested_id = uuid.uuid1()
+        self.default_pointer = None
 
-class IfStatement(Statement):
-
-    def __init__(self , raw_statement , splitted):
-        super(raw_statement , splitted)
         self.true_pointer = None
         self.false_pointer = None
-
 
 class Token:
 

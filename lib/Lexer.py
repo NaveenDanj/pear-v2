@@ -36,6 +36,10 @@ def generate_lex_tree (content_by_lines) :
     statement_list = build_syntax_tree(statement_list)
     statement_list = lexer(statement_list)
     statement_list = blokerize_lex_tree(statement_list)
+
+    for item in statement_list:
+        if item.next != None:
+            print(item.pointer , " -> " ,  item.raw_statement , " -> " , item.true_pointer , item.false_pointer , item.next.pointer , item.default_pointer)
     
 def build_syntax_tree(statement_list):
 
@@ -55,6 +59,8 @@ def lexer(statement_list):
             lex_if(lexer_index , statement_list)
         elif st.splitted[0] == 'while':
             lex_while(lexer_index , statement_list)
+        else:
+            lex_expression(lexer_index , statement_list)
         lexer_index += 1
 
     # for item in statement_list:
@@ -66,6 +72,31 @@ def blokerize_lex_tree(statement_list):
     
     for index , st in enumerate(statement_list):
         if st.splitted[0] == 'if':
-            lex_blockarize_if(index , statement_list)
-    
+            true_part , false_part , endif_index = lex_blockarize_if(index , statement_list)
+            st.true_pointer = true_part[0].pointer
+            st.default_pointer = endif_index
+            # print('----------------' , statement_list[ true_part[ len(true_part)-1 ].pointer ].next )
+            # statement_list[ true_part[ len(true_part)-1 ].pointer ].next = endif_index
+
+            if len(false_part) > 0:
+                st.false_pointer = false_part[0].pointer
+
     return statement_list
+
+
+
+def lex_expression(lexer_index , statement_list):
+    if lexer_index+1 ==  len(statement_list)-1:
+        statement_list[lexer_index].next = None
+    else:
+        statement_list[lexer_index].next = statement_list[lexer_index+1]
+
+    if lexer_index > 0:
+        statement_list[lexer_index].prev_pointer = statement_list[lexer_index-1]
+
+    return statement_list
+
+def link_blocks(statement_list):
+    for index , st in enumerate(statement_list):
+        if st.splitted[0] == 'if':
+            pass

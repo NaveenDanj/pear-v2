@@ -39,7 +39,4 @@ def lex_blockarize_if(index , statement_list):
                 if item.splitted[0] == 'endif':
                     true_part = statement_list[index+1 : item_index]
 
-    print('---------------------')
-    print()
-    for item in false_part:
-        print(item.raw_statement)
+    return true_part , false_part , endif_index
