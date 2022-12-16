@@ -38,11 +38,11 @@ def generate_lex_tree (content_by_lines) :
     statement_list = blokerize_lex_tree(statement_list)
     statement_list = link_blocks(statement_list)
 
-    
+    return statement_list
 
-    for item in statement_list:
-        if item.next != None:
-            print(item.pointer , " -> " ,  item.raw_statement , " -> " , item.default_pointer , item.true_pointer , item.false_pointer , item.next.pointer)
+    # for item in statement_list:
+    #     if item.next != None:
+    #         print(item.pointer , " -> " ,  item.raw_statement , " -> " , item.default_pointer , item.true_pointer , item.false_pointer , item.next.pointer)
     
 def build_syntax_tree(statement_list):
 
@@ -65,9 +65,6 @@ def lexer(statement_list):
         else:
             lex_expression(lexer_index , statement_list)
         lexer_index += 1
-        
-    # for item in statement_list:
-    #     print(item.raw_statement , "-" , item.nested_id)
 
     return statement_list
     
