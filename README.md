@@ -19,6 +19,7 @@ npm run build
 
 ## Find maximum number
 
+```
 @start
 
 var float n1 = float( input('Enter number 1 : ') )
@@ -59,7 +60,11 @@ endif
 
 @end
 
+```
+
 ## Factorial of a given number
+
+```
 
 @start
 
@@ -74,3 +79,5 @@ endwhile
 print 'Factorial is ' + str(var['total'])
 
 @end
+
+```
