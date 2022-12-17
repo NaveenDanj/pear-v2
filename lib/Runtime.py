@@ -1,6 +1,8 @@
 from lib.RuntimUtil.If_util import handle_if_statement
 from lib.RuntimUtil.Mem import var
 from lib.RuntimUtil.var_util import handle_var_statement , handle_set_var_statement
+from lib.RuntimUtil.print_util import handle_print
+
 
 def run_pointer_statement(statement):
     if statement.splitted[0] == 'if':
@@ -12,7 +14,7 @@ def run_pointer_statement(statement):
     elif statement.splitted[0] == 'set':
         return handle_set_var_statement(statement)
     elif statement.splitted[0] == 'print':
-        return statement.next
+        return handle_print(statement)
     else:
         return statement.next
 

@@ -3,7 +3,8 @@
 var int number1 = int( input('Enter number 1 : ') )
 var int number2 = int( input('Enter number 2 : ') )
 var int total = 0
-set var['total'] = var['number1'] + var['number2'] 
+set var['total'] = var['number1'] + var['number2']
+print 'hello world'
 
 if True
     if True and True
