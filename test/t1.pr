@@ -1,6 +1,6 @@
 @start
 
-var int x1 = 10
+var int x1 = 90
 var int x2 = 20
 
 if True
@@ -32,19 +32,11 @@ if True
 endif
 
 
-
-
-
-
 if False
     print 'another new 7'
 else
     print 'another else 8'
 endif
-
-
-
-
 
 
 if False

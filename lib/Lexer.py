@@ -38,10 +38,10 @@ def generate_lex_tree (content_by_lines) :
     statement_list = blokerize_lex_tree(statement_list)
     statement_list = link_blocks(statement_list)
 
-    print('-------------------')
+    # print('-------------------')
 
-    for item in statement_list:
-        print(item.pointer , " -> " ,  item.raw_statement)
+    # for item in statement_list:
+    #     print(item.pointer , " -> " ,  item.raw_statement)
     
     return statement_list
 
