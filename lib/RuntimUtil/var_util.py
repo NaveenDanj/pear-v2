@@ -1,10 +1,10 @@
 from lib.RuntimUtil.Mem import var , sample_data_types , mem
 
 def handle_var_statement(statement):
-    
-    val = eval(statement.raw_statement.split("=")[1])
-    var_name = statement.raw_statement.split(' ')[2]
-    var_data_type = statement.raw_statement.split(' ')[1]
+    st = statement.raw_statement.strip()
+    val = eval(st.split("=")[1])
+    var_name = st.split(' ')[2]
+    var_data_type = st.split(' ')[1]
 
     if type(val) != type(sample_data_types[var_data_type]):
         raise Exception('Invalid data type')
@@ -24,9 +24,9 @@ def handle_var_statement(statement):
 
 
 def handle_set_var_statement(statement):
-    
-    val = eval(statement.raw_statement.split("=")[1])
-    var_name = statement.raw_statement.split(' ')[1]
+    st = statement.raw_statement.strip()
+    val = eval(st.split("=")[1])
+    var_name = st.split(' ')[1]
     var_name = get_substring(var_name , "var['" , "']")
 
     if var_name not in mem:

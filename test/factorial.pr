@@ -1,0 +1,13 @@
+@start
+
+var int n = int( input('Enter number 1 : ') )
+var int total = 1
+
+while var['n'] > 0
+    set var['total'] = var['total'] * var['n']
+    set var['n'] = var['n'] - 1
+endwhile
+
+print 'Factorial is ' + str(var['total'])
+
+@end

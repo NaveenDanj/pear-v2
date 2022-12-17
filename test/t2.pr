@@ -5,10 +5,20 @@ var int number2 = int( input('Enter number 2 : ') )
 var int total = 0
 set var['total'] = var['number1'] + var['number2']
 
-if var['total'] > 100
+if var['total'] > 100 
     print 'Grater than 100'
+    var float avg = var['total'] / 2
+    print 'the average is : ' +  str( var['avg'] )
 else
     print 'Less than 100'
 endif
+
+var int incrementor = 1
+var int max_val = 10
+
+while var['incrementor'] < var['max_val']
+    print 'hello world'
+    set var['incrementor'] = var['incrementor'] + 1
+endwhile
 
 @end

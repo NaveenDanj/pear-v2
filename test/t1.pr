@@ -21,7 +21,7 @@ if True
             print 'another else 4'
         endif
 
-        while True do
+        while True
 
             if condtion_stisfied_while_statement
                 print 'itteration statements 5'
