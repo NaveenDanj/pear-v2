@@ -13,6 +13,12 @@ def lex_while(lexer_index , statement_list):
             item.nested_id = statement_list[lexer_index].nested_id
 
 
+def lex_function(lexer_index , statement_list):
+    for index , item in enumerate(statement_list[lexer_index :]):        
+        if item.splitted[0] == 'endfunction' and item.white_space_before == statement_list[lexer_index].white_space_before:
+            item.nested_id = statement_list[lexer_index].nested_id
+
+
 def lex_blockarize_if(index , statement_list):
     root_item = statement_list[index]
     have_else = False
@@ -55,6 +61,17 @@ def lex_blockarize_while(index , statement_list):
     
     return endwhile_index , index
 
+
+def lex_blockarize_function(index , statement_list):
+    root_item = statement_list[index]
+    endfunction_index = 0
+    
+    for item_index , item in enumerate(statement_list):
+        if root_item.nested_id == item.nested_id:
+            if item.splitted[0] == 'endfunction':
+                endfunction_index = item_index
+    
+    return endfunction_index , index
 
 
 def remove_unwanted_whitespaces(string):

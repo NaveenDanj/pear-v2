@@ -3,9 +3,9 @@ from lib.RuntimUtil.Mem import var
 from lib.RuntimUtil.var_util import handle_var_statement , handle_set_var_statement
 from lib.RuntimUtil.print_util import handle_print
 from lib.RuntimUtil.while_util import handle_while
+from lib.RuntimUtil.function_util import handle_function_call , handle_function_init
 
-
-def run_pointer_statement(statement):
+def run_pointer_statement(statement , parse_tree):
     if statement.splitted[0] == 'if':
         return handle_if_statement(statement)
     elif statement.splitted[0] == 'while':
@@ -16,15 +16,20 @@ def run_pointer_statement(statement):
         return handle_set_var_statement(statement)
     elif statement.splitted[0] == 'print':
         return handle_print(statement)
+    elif statement.splitted[0] == 'call':
+        next_ , parse_tree = handle_function_call(statement , parse_tree)
+        return next_
+    elif statement.splitted[0] == 'function':
+        return handle_function_init(statement)
     else:
         return statement.next
 
 
 def interprete(parse_tree):
-    next_pointer = run_pointer_statement(parse_tree[0])
+    next_pointer = run_pointer_statement(parse_tree[0] , parse_tree)
     # print(next_pointer.next.next.raw_statement)
 
     while next_pointer != None :
-        next_next_pointer =  run_pointer_statement(next_pointer)
+        next_next_pointer =  run_pointer_statement(next_pointer , parse_tree)
         next_pointer = next_next_pointer
 

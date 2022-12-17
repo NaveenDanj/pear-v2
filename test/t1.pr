@@ -1,11 +1,12 @@
 @start
+    
+    function function_name () ->
+        print 'function called'
+    endfunction
+    
+    call function_name->()
+    print 'after function call'
+    call function_name->()
 
-var  int   var_name = 10
-print 'hello   world ' + str(var['var_name'])
-
-~ function function_name (  ) ->
-
-
-~ endfunction
 
 @end

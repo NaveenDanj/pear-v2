@@ -21,6 +21,9 @@ class Statement:
         self.true_pointer = None
         self.false_pointer = None
 
+        self.parameters = None
+        self.given_parameters = None
+
 class Token:
 
     def __init__(self , type , ):
