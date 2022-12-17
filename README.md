@@ -10,11 +10,6 @@ This language is written by me using python. This Language is using intrepreter.
 Simply run the command 'pear filename.pr'
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
 # Examples
 
 ## Find maximum number
