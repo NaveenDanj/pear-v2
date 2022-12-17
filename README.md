@@ -7,7 +7,7 @@ This language is written by me using python. This Language is using intrepreter.
 ## Installation
 Installing Pear to your windows operating system is fairly easy.
 
-1) First Download the latest version of pear from our [official github repository](https://github.com/NaveenDanj/pear-v2/tags).
+1) First Download the latest version of pear from our [official github repository](https://github.com/NaveenDanj/pear-v2/releases).
 2) Exctract the pear binary to the root of the C drive.
 3) Add Pear binary file path to your environment variable.
 
