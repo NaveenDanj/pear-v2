@@ -15,5 +15,62 @@ Simply run the command 'pear filename.pr'
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Examples
+
+## Find maximum number
+
+@start
+
+var float n1 = float( input('Enter number 1 : ') )
+var float n2 = float( input('Enter number 2 : ') )
+var float n3 = float( input('Enter number 3 : ') )
+
+if var['n1'] > var['n2']
+
+    if var['n1'] > var['n3']
+        print 'max number is : ' + str( var['n1'] )
+    else
+        print 'max number is : ' + str( var['n3'] )
+    endif
+
+else
+
+    if var['n2'] > var['n3']
+
+        if var['n2'] > var['n1']
+            print 'max number is : ' + str( var['n2'] ) 
+
+        else
+            print 'max number is : ' + str( var['n1'] ) 
+        endif
+
+    else
+
+        if var['n3'] > var['n1']
+            print 'max number is : ' + str( var['n3'] ) 
+
+        else
+            print 'max number is : ' + str( var['n1'] ) 
+        endif
+
+    endif
+
+endif
+
+@end
+
+## Factorial of a given number
+
+@start
+
+var int n = int( input('Enter number 1 : ') )
+var int total = 1
+
+while var['n'] > 0
+    set var['total'] = var['total'] * var['n']
+    set var['n'] = var['n'] - 1
+endwhile
+
+print 'Factorial is ' + str(var['total'])
+
+@end
