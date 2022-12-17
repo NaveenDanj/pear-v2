@@ -1,21 +1,24 @@
 @start
 
-if condition
-    if another_condition
+var int x1 = 10
+var int x2 = 20
+
+if True
+    if True and True
         print 'condition is true'
-        if new_condition
+        if True
             print 'another new 1'
         else
             print 'another else 2'
         endif
     else
-        if new_condition
+        if True
             print 'another new 3'
         else
             print 'another else 4'
         endif
 
-        while condition do
+        while True do
 
             if condtion_stisfied_while_statement
                 print 'itteration statements 5'
@@ -33,7 +36,7 @@ endif
 
 
 
-if last_new_condition
+if False
     print 'another new 7'
 else
     print 'another else 8'
@@ -44,7 +47,7 @@ endif
 
 
 
-if last_new_condition
+if False
     print 'another new 9'
 else
     print 'another else 10'
