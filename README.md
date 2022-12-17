@@ -4,6 +4,13 @@
 
 This language is written by me using python. This Language is using intrepreter. All components (Lexer , Parser , Runtime) is written by me. Currently supporting String , int , float , boolean data types. Still in the experimental stage 
 
+## Installation
+Installing Pear to your windows operating system is fairly easy.
+
+1) First Download the latest version of pear from our official github repository.
+2) Exctract the pear binary to the root of the C drive.
+3) Add Pear binary file path to your environment variable.
+
 
 ### Run Pear script
 ```
