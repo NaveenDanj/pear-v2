@@ -1,6 +1,7 @@
 from lib.const.Keywords import KEYWORDS
 from lib.const.SysConst import Statement
 from lib.util.lex_helper import lex_if , lex_while , lex_blockarize_if , lex_blockarize_while
+import re
 
 def generate_lex_tree (content_by_lines) :
 
@@ -10,6 +11,8 @@ def generate_lex_tree (content_by_lines) :
     for statement in content_by_lines:
 
         statement.line = statement.raw_line.strip()
+        statement.line = re.sub(" +", " ", statement.line)
+        print('line is : ' , statement.line)
         splitted = statement.line.split(" ")
 
         if len(splitted) == 0:

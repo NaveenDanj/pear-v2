@@ -1,51 +1,11 @@
 @start
 
-var int number1 = int( input('Enter number 1 : ') )
-var int number2 = int( input('Enter number 2 : ') )
-var int total = 0
-set var['total'] = var['number1'] + var['number2']
-print 'hello world'
+var  int   var_name = 10
+print 'hello   world ' + str(var['var_name'])
 
-if True
-    if True and True
-        print 'condition is true'
-        if True
-            print 'another new 1'
-        else
-            print 'another else 2'
-        endif
-    else
-        if True
-            print 'another new 3'
-        else
-            print 'another else 4'
-        endif
-
-        while True
-
-            if condtion_stisfied_while_statement
-                print 'itteration statements 5'
-            endif
-
-            print 'print anyways 6'
-
-        endwhile
-
-    endif
-endif
+~ function function_name (  ) ->
 
 
-if False
-    print 'another new 7'
-else
-    print 'another else 8'
-endif
-
-
-if False
-    print 'another new 9'
-else
-    print 'another else 10'
-endif
+~ endfunction
 
 @end

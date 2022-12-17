@@ -1,3 +1,5 @@
+import re
+
 def lex_if(lexer_index , statement_list):
     for index , item in enumerate(statement_list[lexer_index :]):        
         if item.splitted[0] == 'endif' and item.white_space_before == statement_list[lexer_index].white_space_before:
@@ -52,3 +54,9 @@ def lex_blockarize_while(index , statement_list):
                 endwhile_index = item_index
     
     return endwhile_index , index
+
+
+
+def remove_unwanted_whitespaces(string):
+    out = re.sub(" +", " ", string)
+    return out

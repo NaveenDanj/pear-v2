@@ -1,7 +1,8 @@
 from lib.RuntimUtil.Mem import var , sample_data_types , mem
+from lib.util.lex_helper import remove_unwanted_whitespaces
 
 def handle_var_statement(statement):
-    st = statement.raw_statement.strip()
+    st = remove_unwanted_whitespaces( statement.raw_statement.strip() )
     val = eval(st.split("=")[1])
     var_name = st.split(' ')[2]
     var_data_type = st.split(' ')[1]
@@ -24,7 +25,7 @@ def handle_var_statement(statement):
 
 
 def handle_set_var_statement(statement):
-    st = statement.raw_statement.strip()
+    st = remove_unwanted_whitespaces( statement.raw_statement.strip() )
     val = eval(st.split("=")[1])
     var_name = st.split(' ')[1]
     var_name = get_substring(var_name , "var['" , "']")
