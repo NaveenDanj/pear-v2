@@ -1,1 +1,1 @@
-KEYWORDS = ['var' , 'if' , 'else' , 'endif' , 'print'  , 'while' , 'endwhile' , '@start' , '@end']
+KEYWORDS = ['set', 'var' , 'if' , 'else' , 'endif' , 'print'  , 'while' , 'endwhile' , '@start' , '@end']
