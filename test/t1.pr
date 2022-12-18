@@ -2,11 +2,11 @@
     
     function function_name () ->
         print 'function called'
+        call function_name->()
     endfunction
     
     call function_name->()
     print 'after function call'
-    call function_name->()
-
+    ~ call function_name->()
 
 @end
