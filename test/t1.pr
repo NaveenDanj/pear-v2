@@ -2,11 +2,21 @@
     
     function function_name () ->
         print 'function called'
-        call function_name->()
+    endfunction
+
+    function sumOfTwoIntegers () ->
+        print 'Sum Of Two Number : '
+        var int x1 = int( input(' Enter n1 : ') )
+        var int x2 = int( input(' Enter n2 : ') )
+        var int total = var['x1'] + var['x2']
+        print 'The total is : ' + str(var['total'] )
     endfunction
     
-    call function_name->()
+    call function_name ->()
     print 'after function call'
-    ~ call function_name->()
 
+
+    call sumOfTwoIntegers ->()
+    call function_name ->()
+    call sumOfTwoIntegers ->()
 @end
