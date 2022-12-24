@@ -1,6 +1,5 @@
-from lib.RuntimUtil.Mem import var , sample_data_types , mem
+from lib.RuntimUtil.Mem import var , sample_data_types , local , scope , mem
 from lib.util.lex_helper import remove_unwanted_whitespaces
-import uuid
 
 
 def handle_var_statement(statement):
@@ -12,26 +11,44 @@ def handle_var_statement(statement):
     if type(val) != type(sample_data_types[var_data_type]):
         raise Exception('Invalid data type')
 
-    if var_name in var:
-        raise Exception('Variable name ' , var_name , ' already been initialized')
+    if scope['func_name'] == 'global':
+        if var_name in mem :
+            raise Exception('Variable name ' , var_name , ' already been initialized')
+    else:
+        if var_name in local :
+            raise Exception('Variable name ' , var_name , ' already been initialized')
+    
 
-    mem[var_name] = {
-        "datatype" : var_data_type,
-        "value" : val,
-        "name" : var_name,
-        "id" : len(mem)-1
-    }
 
-    var[var_name] = val
+    if scope['func_name'] == 'global' :
+        mem[var_name] = {
+            "datatype" : var_data_type,
+            "value" : val,
+            "name" : var_name,
+            'scope' : 'global'
+        }
+    else:
+        local[var_name] = {
+            "datatype" : var_data_type,
+            "value" : val,
+            "name" : var_name,
+            'scope' : scope['func_name']
+        }
+    # var[var_name] = val
+
+    print('----------------------------------------')
+    print(local)
+    print(mem)
 
     return statement.next
+
 
 
 def handle_set_var_statement(statement):
     st = remove_unwanted_whitespaces( statement.raw_statement.strip() )
     val = eval(st.split("=")[1])
     var_name = st.split(' ')[1]
-    var_name = get_substring(var_name , "var['" , "']")
+    var_name = get_substring(var_name , "var('" , "')")
 
     if var_name not in mem:
         raise Exception('Variable name ' , var_name , ' undefined')
@@ -42,11 +59,8 @@ def handle_set_var_statement(statement):
         raise Exception('Invalid data type')
 
     mem[var_name]['value'] = val
-    var[var_name] = val
 
     return statement.next
-
-
 
 def get_substring(original_string , sub1 , sub2):
     

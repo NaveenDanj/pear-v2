@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This language is written by me using python. This Language is using intrepreter. All components (Lexer , Parser , Runtime) is written by me. In this language i have tried to reduce the complexity of the code and tried to implement the syntax similar to the psuedo code so its easier to build a code by just looking at the algorithm. Currently supporting String , int , float , boolean data types. Still in the experimental stage 
+This language is written by me using python. This Language is using intrepreter. All components (Lexer , Parser , Runtime) is written by me. In this language i have tried to reduce the complexity of the code and tried to implement the syntax similar to the psuedo code so its easier to build a code by just looking at the algorithm. Currently supporting String , int , float , boolean data types. Still in the experimental stage.
 
 ## Installation
 Installing Pear to your windows operating system is fairly easy.

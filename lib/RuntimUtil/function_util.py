@@ -1,4 +1,4 @@
-from lib.RuntimUtil.Mem import var , mem
+from lib.RuntimUtil.Mem import var , mem , scope , local
 
 def handle_function_call(statement , parse_tree):
 
@@ -10,6 +10,7 @@ def handle_function_call(statement , parse_tree):
     function_name = function_name[:function_name.index('>')-1]
     function_name = function_name.strip()
     function_start_pointer = None
+    scope['func_name'] = function_name
 
     for index , st in enumerate(parse_tree):
         if st.splitted[0] == 'function':
@@ -38,23 +39,25 @@ def handle_endfunction(statement , parse_tree):
     
     function_start_pointer = None
     function_end_pointer = statement.pointer
+    func_name = None
 
     for i in range(len(parse_tree)-1 , -1 , -1):
         st = parse_tree[i]
         if st.splitted[0] == 'function':
-           function_start_pointer = st.pointer
-           break
+            function_start_pointer = st.pointer
+            func_name = st.raw_statement.split(" ")[1]
+            func_name = func_name.strip()
+            break
 
     for item in parse_tree[function_start_pointer : function_end_pointer + 1]:
 
         if item.splitted[0] == 'var':
             var_name = item.splitted[2]
-            if var_name in var:
-                del var[var_name]
-            
-            if var_name in mem:
-                del  mem[var_name]
+            if var_name in local:
+                if local[var_name]['scope'] == func_name:
+                    del local[var_name]
     
+    scope['func_name'] = 'global'
     return statement.next
 
 def check_func_name_matching(n1 , n2):
