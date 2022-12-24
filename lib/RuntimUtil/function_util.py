@@ -1,4 +1,4 @@
-
+from lib.RuntimUtil.Mem import var , mem
 
 def handle_function_call(statement , parse_tree):
 
@@ -35,7 +35,26 @@ def handle_function_init(statement):
 
 
 def handle_endfunction(statement , parse_tree):
-    print('hit the end function')
+    
+    function_start_pointer = None
+    function_end_pointer = statement.pointer
+
+    for i in range(len(parse_tree)-1 , -1 , -1):
+        st = parse_tree[i]
+        if st.splitted[0] == 'function':
+           function_start_pointer = st.pointer
+           break
+
+    for item in parse_tree[function_start_pointer : function_end_pointer + 1]:
+
+        if item.splitted[0] == 'var':
+            var_name = item.splitted[2]
+            if var_name in var:
+                del var[var_name]
+            
+            if var_name in mem:
+                del  mem[var_name]
+    
     return statement.next
 
 def check_func_name_matching(n1 , n2):

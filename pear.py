@@ -3,7 +3,7 @@ from lib.Lexer import generate_lex_tree
 from lib.Parser import generate_parse_tree
 from lib.const.SysConst import Line
 from lib.Runtime import interprete
-from lib.RuntimUtil.Mem import var
+from lib.RuntimUtil.Mem import var , mem
 
 if sys.argv[1] == '--v':
     sys.exit("v1.0.0")
@@ -24,5 +24,6 @@ parse_tree = generate_parse_tree(lex_tree)
 interprete(parse_tree)
 
 
-# print('----------------------------------------')
-# print(var)
+print('----------------------------------------')
+print(var)
+print(mem)

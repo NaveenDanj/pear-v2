@@ -18,7 +18,6 @@ def run_pointer_statement(statement , parse_tree):
         return handle_print(statement)
     elif statement.splitted[0] == 'call':
         next_ , parse_tree = handle_function_call(statement , parse_tree)
-        # print('call statement : ' , statement.raw_statement , 'call next : ' , next_.raw_statement)
         return next_
     elif statement.splitted[0] == 'function':
         return handle_function_init(statement)

@@ -1,5 +1,7 @@
 from lib.RuntimUtil.Mem import var , sample_data_types , mem
 from lib.util.lex_helper import remove_unwanted_whitespaces
+import uuid
+
 
 def handle_var_statement(statement):
     st = remove_unwanted_whitespaces( statement.raw_statement.strip() )
@@ -16,7 +18,8 @@ def handle_var_statement(statement):
     mem[var_name] = {
         "datatype" : var_data_type,
         "value" : val,
-        "name" : var_name
+        "name" : var_name,
+        "id" : len(mem)-1
     }
 
     var[var_name] = val
@@ -57,3 +60,6 @@ def get_substring(original_string , sub1 , sub2):
 
     return res
 
+
+def get_object_id(var_name):
+    pass

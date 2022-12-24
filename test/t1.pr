@@ -1,11 +1,19 @@
 @start
+
+    var int i = 10
+    var int j = 10
+    var int x1 = 100
+    var int x2 = 200
+    var list l = [1,2,3,4,5]
     
+    print 'list val is : ' + str( var['l'][3] )
+
     function function_name () ->
         print 'function called'
     endfunction
 
     function sumOfTwoIntegers () ->
-        print 'Sum Of Two Number : '
+        print 'Sum Of Two Numbers : '
         var int x1 = int( input(' Enter n1 : ') )
         var int x2 = int( input(' Enter n2 : ') )
         var int total = var['x1'] + var['x2']
@@ -19,4 +27,7 @@
     call sumOfTwoIntegers ->()
     call function_name ->()
     call sumOfTwoIntegers ->()
+
+    print 'x1 value is : ' + str(var['x1'])
+
 @end
