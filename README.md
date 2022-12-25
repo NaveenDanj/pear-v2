@@ -97,7 +97,7 @@ print 'Factorial is ' + str(var['total'])
         print 'Sum Of Two Numbers : '
         var int x1 = int( input(' Enter n1 : ') )
         var int x2 = int( input(' Enter n2 : ') )
-            call sum ->( var('x1') , var('x2') )
+        call sum ->( var('x1') , var('x2') )
     endfunction
     
     
