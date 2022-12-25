@@ -1,7 +1,6 @@
-
-
 mem = {}
 local = {}
+param = {}
 scope = {"func_name" : 'global' }
 
 sample_data_types = {
@@ -15,5 +14,8 @@ sample_data_types = {
 def var(var_name):
     if scope['func_name'] == 'global':
         return mem[var_name]['value']
+    elif var_name in param:
+        if param[var_name]['func_name'] == scope['func_name']:
+            return  param[var_name]['value']
     else:
         return local[var_name]['value']

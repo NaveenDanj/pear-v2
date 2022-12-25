@@ -36,9 +36,9 @@ def handle_var_statement(statement):
         }
     # var[var_name] = val
 
-    print('----------------------------------------')
-    print(local)
-    print(mem)
+    # print('----------------------------------------')
+    # print(local)
+    # print(mem)
 
     return statement.next
 
@@ -49,16 +49,24 @@ def handle_set_var_statement(statement):
     val = eval(st.split("=")[1])
     var_name = st.split(' ')[1]
     var_name = get_substring(var_name , "var('" , "')")
+    var_instance = None
 
-    if var_name not in mem:
-        raise Exception('Variable name ' , var_name , ' undefined')
-
-    var_instance = mem[var_name]
-    
+    if scope['func_name'] == 'global':
+        var_instance = mem[var_name]
+        if var_name not in mem :
+            raise Exception('Variable name ' , var_name , ' undefined')
+    else:
+        var_instance = local[var_name]
+        if var_name not in local :
+            raise Exception('Variable name ' , var_name , ' undefined')
+        
     if type(val) != type(sample_data_types[ var_instance['datatype'] ]):
         raise Exception('Invalid data type')
 
-    mem[var_name]['value'] = val
+    if scope['func_name'] == 'global' :
+        mem[var_name]['value'] = val
+    else:
+        local[var_name]['value'] = val
 
     return statement.next
 

@@ -1,29 +1,23 @@
 @start
 
-    var int x1 = 100
-    var int x2 = 200
-
-    function function_name () ->
-        print 'function called'
+    function sum (int param1 , int param2) ->
+        print 'total is : ' + str( var('param1') + var('param2')  )
     endfunction
 
-    function sumOfTwoIntegers () ->
+    function InputNumbers () ->
         print 'Sum Of Two Numbers : '
         var int x1 = int( input(' Enter n1 : ') )
         var int x2 = int( input(' Enter n2 : ') )
-        var int total = var('x1') + var('x2')
-        print 'The total is : ' + str(var('total') )
+        call sum ->( var('x1') , var('x2') )
     endfunction
     
-    call function_name ->()
-    print 'after function call'
+    
+    call InputNumbers ->()
+    call InputNumbers ->()
+    call InputNumbers ->()
+    call InputNumbers ->()
+    call InputNumbers ->()
 
-
-    call sumOfTwoIntegers ->()
-    call function_name ->()
-    call sumOfTwoIntegers ->()
-
-    print 'x1 value is : ' + str(var('x1'))
-
+    print 'Done'
 
 @end

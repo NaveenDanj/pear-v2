@@ -43,7 +43,8 @@ def generate_lex_tree (content_by_lines) :
     # print('-------------------')
 
     # for item in statement_list:
-    #     print(item.pointer , " -> " ,  item.raw_statement , item.next.pointer)
+    #     if item.next != None:
+    #         print(item.pointer , " -> " ,  item.raw_statement , item.next.pointer)
     
     return statement_list
 
@@ -96,6 +97,29 @@ def blokerize_lex_tree(statement_list):
             st.default_pointer = endfunction_index
             st.next = statement_list[endfunction_index]
             statement_list[endfunction_index].next = statement_list[endfunction_index+1]
+
+            st = statement_list[index]
+            func_name = st.raw_statement.split(" ")[1]
+            func_name = func_name.strip()
+            param_list = st.raw_statement[st.raw_statement.index( '(' )+1 : st.raw_statement.index( ')' )].strip()
+            param_list = param_list.split(',')
+            param_list_out = {}
+
+
+            for index , param in enumerate(param_list):
+                param_list[index] =  param_list[index].strip()
+                data_type = param_list[index].split(' ')[0]
+                var_name = param_list[index].split(' ')[-1]
+                if var_name != '':
+
+                    param_list_out[var_name] = {
+                        "var_name" : var_name,
+                        "value" : None,
+                        "datatype" : data_type,
+                        "func_name" : func_name
+                    }
+
+            st.parameters = param_list_out
 
     return statement_list
 

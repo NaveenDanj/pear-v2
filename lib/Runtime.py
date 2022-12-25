@@ -33,5 +33,12 @@ def interprete(parse_tree):
 
     while next_pointer != None :
         next_next_pointer =  run_pointer_statement(next_pointer , parse_tree)
+        # print(next_next_pointer.raw_statement , next_next_pointer.pointer)
         next_pointer = next_next_pointer
+
+        # for item in parse_tree:
+        #     if item.next != None:
+        #         print(item.pointer , " -> " ,  item.raw_statement , item.next.pointer)
+
+        # print('-----------------------------------')
 
