@@ -9,7 +9,6 @@ def handle_function_call(statement , parse_tree):
     function_name = function_name[:function_name.index('>')-1]
     function_name = function_name.strip()
     function_start_pointer = None
-    scope['func_name'] = function_name
 
     params = statement.raw_statement[statement.raw_statement.index( '(' )+1 : -2]
     param_list = params.split(',')
@@ -38,6 +37,9 @@ def handle_function_call(statement , parse_tree):
         if len(param_list) > 0:
             raise Exception('Extra parameters provided for the function ' + function_name)
 
+    scope['func_name'] = function_name
+
+    function_end_pointer = None
 
     for index , st in enumerate(parse_tree):
 
@@ -49,7 +51,7 @@ def handle_function_call(statement , parse_tree):
                 st.default_pointer.next = statement.next
                 statement.next = st.next
         elif st.splitted[0] == 'endfunction':
-
+            function_end_pointer = index
             if temp_pointer == None:
                 # st.next = None
                 parse_tree[index].next = None
@@ -60,6 +62,13 @@ def handle_function_call(statement , parse_tree):
 
     if function_start_pointer == None:
         raise Exception('Function name '+ function_name +'undefined!')
+
+    for item in parse_tree[function_start_pointer.pointer : function_end_pointer]:
+        if item.splitted[0] == 'var':
+            var_name = item.splitted[2]
+            if var_name in local:
+                if local[var_name]['scope'] == func_name:
+                    del local[var_name]
     
     parse_tree[statement.pointer].next = parse_tree[statement.pointer+1]
     # print('next : ' , parse_tree[statement.pointer].next.raw_statement)
@@ -82,17 +91,7 @@ def handle_endfunction(statement , parse_tree):
             func_name = func_name.strip()
             break
 
-    # print('end function for : ' , func_name)
-    
-    for item in parse_tree[function_start_pointer : function_end_pointer + 1]:
-
-        if item.splitted[0] == 'var':
-            var_name = item.splitted[2]
-            if var_name in local:
-                if local[var_name]['scope'] == func_name:
-                    del local[var_name]
-    
-    for item in param:
+    for item , index in param.copy().items():
         if param[item]['func_name'] == func_name:
             del param[item]
 
