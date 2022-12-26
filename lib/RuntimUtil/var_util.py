@@ -1,4 +1,4 @@
-from lib.RuntimUtil.Mem import var , sample_data_types , local , scope , mem
+from lib.RuntimUtil.Mem import var , sample_data_types , local , scope , mem , param
 from lib.util.lex_helper import remove_unwanted_whitespaces
 
 
@@ -46,7 +46,7 @@ def handle_var_statement(statement):
 
 def handle_set_var_statement(statement):
     st = remove_unwanted_whitespaces( statement.raw_statement.strip() )
-    val = eval(st.split("=")[1])
+    val = eval(st.split("=" , 1)[1])
     var_name = st.split(' ')[1]
     var_name = get_substring(var_name , "var('" , "')")
     var_instance = None
@@ -56,17 +56,27 @@ def handle_set_var_statement(statement):
         if var_name not in mem :
             raise Exception('Variable name ' , var_name , ' undefined')
     else:
-        var_instance = local[var_name]
-        if var_name not in local :
+        if var_name in local :
+            var_instance = local[var_name]
+        elif var_name in param:
+            var_instance = param[var_name]
+        else:
             raise Exception('Variable name ' , var_name , ' undefined')
-        
+    
+    
     if type(val) != type(sample_data_types[ var_instance['datatype'] ]):
         raise Exception('Invalid data type')
 
     if scope['func_name'] == 'global' :
         mem[var_name]['value'] = val
     else:
-        local[var_name]['value'] = val
+
+        if var_name in local:
+            local[var_name]['value'] = val
+        elif var_name in param:
+            param[var_name]['value'] = val
+        else:
+            raise Exception('Variable name ' , var_name , ' undefined')    
 
     return statement.next
 

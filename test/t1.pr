@@ -5,6 +5,17 @@
         call sum ->( var('n1') , var('n1') )
     endfunction
 
+    function factorial (int n) ->
+        var int total = 1
+
+        while var('n') > 0
+            set var('total') = var('total') * var('n')
+            set var('n') = var('n') - 1
+        endwhile
+
+        print 'Factorial is : ' + str( var('total') )
+
+    endfunction
 
     function InputNumbers () ->
         var int x1 = int( input('Enter number 1 : ') )
@@ -12,6 +23,12 @@
         call sum ->( var('x1') , var('x2') )
     endfunction
 
-    call InputNumbers ->()
+    function InputNumber () ->
+        var int x1 = int( input('Enter number 1 : ') )
+        call factorial ->( var('x1') )
+    endfunction
+
+    ~ call InputNumbers ->()
+    call InputNumber ->()
 
 @end
