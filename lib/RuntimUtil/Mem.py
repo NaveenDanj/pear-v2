@@ -1,6 +1,7 @@
 mem = {}
 local = {}
 param = {}
+ret = {}
 scope = {"func_name" : 'global' }
 
 sample_data_types = {

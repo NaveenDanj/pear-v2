@@ -3,7 +3,7 @@ from lib.RuntimUtil.Mem import var
 from lib.RuntimUtil.var_util import handle_var_statement , handle_set_var_statement
 from lib.RuntimUtil.print_util import handle_print
 from lib.RuntimUtil.while_util import handle_while
-from lib.RuntimUtil.function_util import handle_function_call , handle_function_init , handle_endfunction
+from lib.RuntimUtil.function_util import handle_function_call , handle_function_init , handle_endfunction , handle_return_statement
 
 def run_pointer_statement(statement , parse_tree):
     if statement.splitted[0] == 'if':
@@ -23,6 +23,8 @@ def run_pointer_statement(statement , parse_tree):
         return handle_function_init(statement)
     elif statement.splitted[0] == 'endfunction':
         return handle_endfunction(statement , parse_tree)
+    elif statement.splitted[0] == 'return':
+        return handle_return_statement(statement , parse_tree)
     else:
         return statement.next
 

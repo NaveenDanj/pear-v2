@@ -1,4 +1,4 @@
-from lib.RuntimUtil.Mem import var , mem , scope , local , param
+from lib.RuntimUtil.Mem import var , mem , scope , local , param , ret
 
 def handle_function_call(statement , parse_tree):
     temp_pointer = None
@@ -95,8 +95,47 @@ def handle_endfunction(statement , parse_tree):
         if param[item]['func_name'] == func_name:
             del param[item]
 
+    # delete the return value from the memory
+    if func_name in ret:
+        del ret[func_name]
+
     scope['func_name'] = 'global'
     return statement.next
+
+
+def handle_return_statement(statement , parse_tree):
+    
+    function_start_pointer = None
+    function_end_pointer = statement.pointer
+    func_name = None
+
+    upper_list = parse_tree[ : statement.pointer]
+    print(upper_list[-1].raw_statement)
+    down_list = parse_tree[statement.pointer:]
+    print(down_list[-1].raw_statement)
+
+    for i in range(len(parse_tree)-1 , -1 , -1):
+        st = parse_tree[i]
+        if st.splitted[0] == 'function':
+            function_start_pointer = st.pointer
+            func_name = st.raw_statement.split(" ")[1]
+            func_name = func_name.strip()
+
+        elif st.splitted[0] == 'endfunction':
+            function_end_pointer = i
+    
+
+    ret_val = statement.raw_statement.split(' ' , 1)[1]
+    ret_val = eval(ret_val)
+
+    ret[func_name] = {
+        "func_name" : func_name,
+        "value" : ret_val,
+        'scope' : func_name
+    }
+
+    return parse_tree[function_end_pointer]
+    
 
 def check_func_name_matching(n1 , n2):
 
