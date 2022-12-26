@@ -1,6 +1,7 @@
 from lib.RuntimUtil.Mem import var , mem , scope , local , param , ret
 
 def handle_function_call(statement , parse_tree):
+    
     temp_pointer = None
     if parse_tree[statement.pointer+1] != None:
         temp_pointer = statement.pointer+1
@@ -9,6 +10,17 @@ def handle_function_call(statement , parse_tree):
     function_name = function_name[:function_name.index('>')-1]
     function_name = function_name.strip()
     function_start_pointer = None
+    
+    function_start_pointer , function_end_pointer = get_function_start_end_pointers(function_name , parse_tree)
+    function_start_pointer = parse_tree[function_start_pointer]
+    function_end_pointer = parse_tree[function_end_pointer]
+    
+    for item in parse_tree[function_start_pointer.pointer : function_end_pointer.pointer]:
+        if item.splitted[0] == 'var':
+            var_name = item.splitted[2]
+            if var_name in local:
+                if local[var_name]['scope'] == function_name:
+                    del local[var_name]
 
     params = statement.raw_statement[statement.raw_statement.index( '(' )+1 : -2]
     param_list = params.split(',')
@@ -37,7 +49,9 @@ def handle_function_call(statement , parse_tree):
         if len(param_list) > 0:
             raise Exception('Extra parameters provided for the function ' + function_name)
 
-    scope['func_name'] = function_name
+    # scope['func_name'] = function_name
+    scope['scope_stack'].append(function_name)
+    scope['func_name'] = scope['scope_stack'][-1]
 
     function_end_pointer = None
 
@@ -63,15 +77,8 @@ def handle_function_call(statement , parse_tree):
     if function_start_pointer == None:
         raise Exception('Function name '+ function_name +'undefined!')
 
-    for item in parse_tree[function_start_pointer.pointer : function_end_pointer]:
-        if item.splitted[0] == 'var':
-            var_name = item.splitted[2]
-            if var_name in local:
-                if local[var_name]['scope'] == func_name:
-                    del local[var_name]
     
     parse_tree[statement.pointer].next = parse_tree[statement.pointer+1]
-    # print('next : ' , parse_tree[statement.pointer].next.raw_statement)
     
     return function_start_pointer , parse_tree
 
@@ -98,32 +105,36 @@ def handle_endfunction(statement , parse_tree):
     # delete the return value from the memory
     if func_name in ret:
         del ret[func_name]
-
-    scope['func_name'] = 'global'
+        
+    if scope['scope_stack'][-1] != 'global':
+        scope['scope_stack'].pop()
+    scope['func_name'] = scope['scope_stack'][-1]
+    
     return statement.next
 
 
 def handle_return_statement(statement , parse_tree):
     
-    function_start_pointer = None
-    function_end_pointer = statement.pointer
+    function_end_pointer = None
     func_name = None
 
     upper_list = parse_tree[ : statement.pointer]
-    print(upper_list[-1].raw_statement)
-    down_list = parse_tree[statement.pointer:]
-    print(down_list[-1].raw_statement)
-
-    for i in range(len(parse_tree)-1 , -1 , -1):
-        st = parse_tree[i]
+    upper_list.reverse()
+    
+    for i in range(len(upper_list)):
+        st = upper_list[i]
         if st.splitted[0] == 'function':
-            function_start_pointer = st.pointer
             func_name = st.raw_statement.split(" ")[1]
             func_name = func_name.strip()
-
-        elif st.splitted[0] == 'endfunction':
-            function_end_pointer = i
+            break
     
+    down_list = parse_tree[statement.pointer:]
+    
+    for item in down_list:
+        if item.splitted[0] == 'endfunction':
+            function_end_pointer = item.pointer
+            break
+
 
     ret_val = statement.raw_statement.split(' ' , 1)[1]
     ret_val = eval(ret_val)
@@ -138,7 +149,6 @@ def handle_return_statement(statement , parse_tree):
     
 
 def check_func_name_matching(n1 , n2):
-
     if len(n1) != len(n2):
         return False
     
@@ -165,3 +175,21 @@ def get_function_statement_by_function_name(function_name , parse_tree):
 
 
 
+def get_function_start_end_pointers(function_name , parse_tree):
+    
+    function_start_pointer = None
+    function_end_pointer = None
+    
+    for index , st in enumerate(parse_tree):
+    
+        if st.splitted[0] == 'function':
+            func_name = st.raw_statement.split(" ")[1]
+            func_name = func_name.strip()
+            if check_func_name_matching(func_name , function_name) and function_start_pointer == None :
+                function_start_pointer = index
+                
+        elif st.splitted[0] == 'endfunction' and function_end_pointer == None and function_start_pointer != None:
+            function_end_pointer = index
+            break
+        
+    return function_start_pointer , function_end_pointer

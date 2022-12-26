@@ -2,7 +2,7 @@ mem = {}
 local = {}
 param = {}
 ret = {}
-scope = {"func_name" : 'global' }
+scope = {"func_name" : 'global' , "scope_stack" : ['global'] }
 
 sample_data_types = {
     'int' : 0,

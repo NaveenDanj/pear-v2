@@ -24,6 +24,6 @@ parse_tree = generate_parse_tree(lex_tree)
 interprete(parse_tree)
 
 
-print('----------------------------------------')
+# print('----------------------------------------')
 # print(var)
-print(ret)
+# print(ret)

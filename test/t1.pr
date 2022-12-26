@@ -1,10 +1,5 @@
 @start
 
-    function sum (int n1 , int n2) ->
-        print 'total is : ' + str( var('n1') + var('n2') )
-        call sum ->( var('n1') , var('n1') )
-    endfunction
-
     function factorial (int n) ->
 
         var int total = 1
@@ -19,21 +14,19 @@
 
     endfunction
 
-    function InputNumbers () ->
-        var int x1 = int( input('Enter number 1 : ') )
-        var int x2 = int( input('Enter number 2 : ') )
-        call sum ->( var('x1') , var('x2') )
-    endfunction
-
     function InputNumber () ->
-        var int x1 = int( input('Enter number 1 : ') )
+        var int x1 = int( input('Enter number : ') )
         call factorial ->( var('x1') )
         var int ret_val = get factorial ->( var('x1') )
-        print 'value is : ' + str(ret_val)
+        print 'value is : ' + str( var('ret_val') )
     endfunction
 
-    ~ call InputNumbers ->()
-    call InputNumber ->()
+    var int itterator = 3
+    
+    while var('itterator') > 0
+        call InputNumber ->()
+        set var('itterator') = var('itterator') - 1        
+    endwhile 
 
     print 'execution done!'
 
