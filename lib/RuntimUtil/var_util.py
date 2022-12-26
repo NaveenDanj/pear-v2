@@ -65,7 +65,26 @@ def handle_var_statement(statement):
 
 def handle_set_var_statement(statement):
     st = remove_unwanted_whitespaces( statement.raw_statement.strip() )
-    val = eval(st.split("=" , 1)[1])
+    val = st.split("=")[1]
+    
+    if 'get' in val:
+        function_name = val.split(' ' , 1)[1]
+        function_name = function_name[:function_name.index('>')-1]
+        function_name = function_name.strip()
+        function_name = function_name.split(' ' , 1)[1]
+        function_name = function_name.strip()
+
+        if function_name not in ret:
+            raise Exception('Function name ' + function_name + ' undefined!')
+        else:
+            val = ret[function_name]['value']
+    else:
+        val = eval(st.split("=")[1])
+
+    
+    
+    
+    
     var_name = st.split(' ')[1]
     var_name = get_substring(var_name , "var('" , "')")
     var_instance = None
