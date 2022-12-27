@@ -1,5 +1,9 @@
 @start
 
+    function print_statement (string s) ->
+        print var('s')
+    endfunction
+
     function factorial (int n) ->
 
         var int total = 1
@@ -16,9 +20,12 @@
     function InputNumber () ->
         var int x1 = int( input('Enter number : ') )
         call factorial ->( var('x1') )
+        
+        
         var int ret_val = 1
         set var('ret_val') = get factorial ->( var('x1') )
-        print 'value is : ' + str( var('ret_val') )
+        ~ print 
+        call print_statement ->( get factorial ->( var('x1') ) )
     endfunction
 
     var int itterator = 3

@@ -41,7 +41,20 @@ def handle_function_call(statement , parse_tree):
             for item  in st.parameters.items():
                 obj = item[1]
                 obj['func_name'] = function_name
-                obj['value'] = eval( param_list[counter] )
+                # obj['value'] = eval( param_list[counter] )
+                if 'get' in param_list[counter]:
+                    val = param_list[counter]
+                    function_name_ = val.split(' ' , 1)[1]
+                    function_name_ = function_name_[:function_name_.index('>')-1]
+                    function_name_ = function_name_.strip()
+                    if function_name_ not in ret:
+                        raise Exception('Function name ' + function_name_ + ' undefined!')
+                    else:
+                        obj['value'] = ret[function_name_]['value']
+                else:
+                    obj['value'] = eval( param_list[counter] )
+                     
+                
                 param[ obj['var_name'] ] = obj
                 counter += 1
     else:
