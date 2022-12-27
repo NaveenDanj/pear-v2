@@ -1,7 +1,6 @@
 from lib.RuntimUtil.Mem import var , mem , scope , local , param , ret
 
 def handle_function_call(statement , parse_tree):
-    
     temp_pointer = None
     if parse_tree[statement.pointer+1] != None:
         temp_pointer = statement.pointer+1
@@ -22,7 +21,7 @@ def handle_function_call(statement , parse_tree):
                 if local[var_name]['scope'] == function_name:
                     del local[var_name]
 
-    params = statement.raw_statement[statement.raw_statement.index( '(' )+1 : -2]
+    params = statement.raw_statement[statement.raw_statement.index( '(' )+1 : -1]
     param_list = params.split(',')
 
     for index , item in enumerate(param_list):
@@ -116,8 +115,8 @@ def handle_endfunction(statement , parse_tree):
             del param[item]
 
     # delete the return value from the memory
-    if func_name in ret:
-        del ret[func_name]
+    # if func_name in ret:
+    #     del ret[func_name]
         
     if scope['scope_stack'][-1] != 'global':
         scope['scope_stack'].pop()
@@ -157,7 +156,7 @@ def handle_return_statement(statement , parse_tree):
         "value" : ret_val,
         'scope' : func_name
     }
-
+        
     return parse_tree[function_end_pointer]
     
 

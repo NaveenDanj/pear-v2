@@ -14,7 +14,6 @@ def handle_var_statement(statement):
         function_name = function_name.strip()
         function_name = function_name.split(' ' , 1)[1]
         function_name = function_name.strip()
-
         if function_name not in ret:
             raise Exception('Function name ' + function_name + ' undefined!')
         else:

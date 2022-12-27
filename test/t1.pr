@@ -1,40 +1,14 @@
 @start
 
-    function print_statement (string s) ->
-        print var('s')
+    function sum (int a , int b) ->
+        var int total_ =  var('a') + var('b')
+        return var('total_')
     endfunction
 
-    function factorial (int n) ->
+    call sum ->(20,4)
 
-        var int total = 1
-        
-        while var('n') > 0
-            set var('total') = var('total') * var('n')
-            set var('n') = var('n') - 1
-        endwhile
-        
-        return var('total') 
+    var int total = get sum ->(20,4)
+    print 'total is : ' + str( var('total') )
 
-    endfunction
-
-    function InputNumber () ->
-        var int x1 = int( input('Enter number : ') )
-        call factorial ->( var('x1') )
-        
-        
-        var int ret_val = 1
-        set var('ret_val') = get factorial ->( var('x1') )
-        ~ print 
-        call print_statement ->( get factorial ->( var('x1') ) )
-    endfunction
-
-    var int itterator = 3
-    
-    while var('itterator') > 0
-        call InputNumber ->()
-        set var('itterator') = var('itterator') - 1        
-    endwhile 
-
-    print 'execution done!'
 
 @end
